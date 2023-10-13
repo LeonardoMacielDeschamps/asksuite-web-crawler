@@ -5,7 +5,6 @@ import {
   HttpCode,
   Post,
 } from '@nestjs/common'
-import * as dayjs from 'dayjs'
 import { z } from 'zod'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { FetchRoomsUseCase } from '@/domain/application/use-cases/fetch-rooms'
@@ -18,7 +17,7 @@ const fetchRoomsBodySchema = z.object({
       date.getUTCMonth(),
       date.getUTCDate(),
     )
-    return dayjs(dateUtc).format('DD/MM/YYYY')
+    return dateUtc
   }),
   checkout: z.coerce.date().transform((date) => {
     const dateUtc = new Date(
@@ -26,7 +25,7 @@ const fetchRoomsBodySchema = z.object({
       date.getUTCMonth(),
       date.getUTCDate(),
     )
-    return dayjs(dateUtc).format('DD/MM/YYYY')
+    return dateUtc
   }),
 })
 
@@ -49,7 +48,7 @@ export class FetchRoomsController {
     })
 
     if (result.isLeft()) {
-      throw new BadRequestException()
+      throw new BadRequestException(result.value.message)
     }
 
     const rooms = result.value.rooms.map(RoomDetailsPresenter.toHttp)

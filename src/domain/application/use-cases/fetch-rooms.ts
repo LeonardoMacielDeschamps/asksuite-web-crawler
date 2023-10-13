@@ -1,15 +1,18 @@
-import { Either, right } from '@/core/either'
+import { Either, left, right } from '@/core/either'
 import { RoomDetails } from '@/domain/enterprise/entities/value-objects/room-details'
 import { RoomsRepository } from '../repositories/rooms-repository'
 import { Injectable } from '@nestjs/common'
+import { CheckInDateGreaterThanCheckOutDate } from './errors/check-in-date-greater-than-check-out-date-error'
+import { DateFormatter } from '../utils/date-formatter'
+import { DateValidator } from '../utils/date-validator'
 
 interface FetchRoomsUseCaseRequest {
-  checkIn: string
-  checkOut: string
+  checkIn: Date
+  checkOut: Date
 }
 
 type FetchRoomsUseCaseResponse = Either<
-  null,
+  CheckInDateGreaterThanCheckOutDate,
   {
     rooms: RoomDetails[]
   }
@@ -17,16 +20,27 @@ type FetchRoomsUseCaseResponse = Either<
 
 @Injectable()
 export class FetchRoomsUseCase {
-  constructor(private roomsRepository: RoomsRepository) {}
+  constructor(
+    private roomsRepository: RoomsRepository,
+    private dateFormatter: DateFormatter,
+    private dateValidator: DateValidator,
+  ) {}
 
   async execute({
     checkIn,
     checkOut,
   }: FetchRoomsUseCaseRequest): Promise<FetchRoomsUseCaseResponse> {
+    if (this.dateValidator.isAfter(checkIn, checkOut)) {
+      return left(new CheckInDateGreaterThanCheckOutDate())
+    }
+
+    const checkInParsed = this.dateFormatter.format(checkIn, 'DD/MM/YYYY')
+    const checkOutParsed = this.dateFormatter.format(checkOut, 'DD/MM/YYYY')
+
     const rooms =
       await this.roomsRepository.findRoomsByCheckInDateAndCheckOutDate(
-        checkIn,
-        checkOut,
+        checkInParsed,
+        checkOutParsed,
       )
 
     return right({
