@@ -1,0 +1,10 @@
+@baseUrl = http://localhost:3333
+
+# @name fetch-rooms
+POST {{baseUrl}}/search
+Content-Type: application/json
+
+{
+  "checkin": "2023-10-25",
+  "checkout": "2023-10-28"
+}
