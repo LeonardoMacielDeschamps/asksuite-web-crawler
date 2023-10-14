@@ -1,6 +1,6 @@
 import { UseCaseError } from '@/core/errors/use-case-error'
 
-export class CheckInDateGreaterThanCheckOutDate
+export class CheckInDateGreaterThanCheckOutDateError
   extends Error
   implements UseCaseError
 {
