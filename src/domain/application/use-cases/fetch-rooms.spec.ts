@@ -1,5 +1,5 @@
 import { DateUtils } from '@/infra/utils/date-utils'
-import { FakeRoomsService } from 'tests/services/fake-rooms-service'
+import { FakeRoomsService } from 'test/services/fake-rooms-service'
 import { RoomsService } from '../services/rooms-service'
 import { DateFormatter } from '../utils/date-formatter'
 import { DateValidator } from '../utils/date-validator'

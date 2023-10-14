@@ -1,6 +1,6 @@
 import { RoomsService } from '@/domain/application/services/rooms-service'
 import { RoomDetails } from '@/domain/enterprise/entities/value-objects/room-details'
-import { makeRoomDetails } from 'tests/factories/make-room-details'
+import { makeRoomDetails } from 'test/factories/make-room-details'
 
 export class FakeRoomsService implements RoomsService {
   async findRoomsByCheckInDateAndCheckOutDate(): Promise<RoomDetails[]> {
