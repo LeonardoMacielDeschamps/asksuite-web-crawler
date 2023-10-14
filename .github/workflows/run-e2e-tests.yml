@@ -1,0 +1,23 @@
+name: Run e2e tests
+
+on: [pull_request]
+
+jobs:
+  run-e2e-tests:
+    name: Run e2e tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - run: pnpm ci
+
+      - run: pnpm run test:e2e
+        env:
+          BASE_URL_SCRAPING: "https://pratagy.letsbook.com.br"
+          
