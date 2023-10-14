@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 import { DateFormatter } from '@/domain/application/utils/date-formatter'
 import { DateValidator } from '@/domain/application/utils/date-validator'
