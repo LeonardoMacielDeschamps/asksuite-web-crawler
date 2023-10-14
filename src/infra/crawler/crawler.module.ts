@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { PuppeteerService } from './puppeteer/puppeteer.service'
-import { RoomsRepository } from '@/domain/application/repositories/rooms-repository'
-import { PuppeteerRoomsRepository } from './puppeteer/repositories/puppeteer-rooms-repository'
+import { RoomsService } from '@/domain/application/services/rooms-service'
+import { PuppeteerRoomsService } from './puppeteer/services/puppeteer-rooms-service'
 import { EnvModule } from '../env/env.module'
 
 @Module({
@@ -9,10 +9,10 @@ import { EnvModule } from '../env/env.module'
   providers: [
     PuppeteerService,
     {
-      provide: RoomsRepository,
-      useClass: PuppeteerRoomsRepository,
+      provide: RoomsService,
+      useClass: PuppeteerRoomsService,
     },
   ],
-  exports: [PuppeteerService, RoomsRepository],
+  exports: [PuppeteerService, RoomsService],
 })
 export class CrawlerModule {}

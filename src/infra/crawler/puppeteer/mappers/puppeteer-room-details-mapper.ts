@@ -1,5 +1,5 @@
 import { RoomDetails } from '@/domain/enterprise/entities/value-objects/room-details'
-import { PuppeteerRoomDetailsProps } from '../repositories/puppeteer-rooms-repository'
+import { PuppeteerRoomDetailsProps } from '../services/puppeteer-rooms-service'
 import { PuppeteerRoomImageMapper } from './puppeteer-room-image-mapper'
 
 export class PuppeteerRoomDetailsMapper {

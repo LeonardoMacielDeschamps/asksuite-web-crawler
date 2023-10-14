@@ -1,4 +1,4 @@
-import { RoomsRepository } from '@/domain/application/repositories/rooms-repository'
+import { RoomsService } from '@/domain/application/services/rooms-service'
 import { Injectable } from '@nestjs/common'
 import { PuppeteerService } from '../puppeteer.service'
 import { EnvService } from '@/infra/env/env.service'
@@ -14,7 +14,7 @@ export type PuppeteerRoomDetailsProps = Omit<RoomDetailsProps, 'images'> & {
 }
 
 @Injectable()
-export class PuppeteerRoomsRepository implements RoomsRepository {
+export class PuppeteerRoomsService implements RoomsService {
   constructor(
     private envService: EnvService,
     private puppeteer: PuppeteerService,
