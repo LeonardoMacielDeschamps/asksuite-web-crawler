@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 
 import { CrawlerModule } from '../crawler/crawler.module'
-import { DateUtilsModule } from './utils/date-utils.module'
+import { DateUtilsModule } from '../utils/date-utils.module'
 
 import { FetchRoomsController } from './controllers/fetch-rooms.controller'
 
