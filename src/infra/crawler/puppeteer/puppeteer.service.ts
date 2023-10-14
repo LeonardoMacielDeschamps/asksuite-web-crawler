@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common'
-import * as puppeteer from 'puppeteer'
+import puppeteer, { EvaluateFunc } from 'puppeteer'
 
 @Injectable()
 export class PuppeteerService {
   async fetchData<ReturnDataType>(
     url: string,
-    evaluateCallback: puppeteer.EvaluateFunc<unknown[]>,
+    evaluateCallback: EvaluateFunc<unknown[]>,
   ): Promise<ReturnDataType[]> {
     const browser = await puppeteer.launch({ headless: 'new' })
 
