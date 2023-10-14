@@ -19,7 +19,7 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
-      - run: pnpm ci
+      - run: pnpm install --frozen-lockfile
 
       - run: pnpm run test:e2e
         env:
